@@ -1,0 +1,94 @@
+/* Google Webフォントを利用設定するCSSをインポート */
+@import url(http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps);
+
+/* body要素(全体) */
+body
+{
+    /* 文字色を白に */
+    color: white;
+    /* 背景色を黒に */
+    background-color: black;
+}
+div#date
+{
+    /* 横幅を親要素であるbodyの100%(同じ幅)にする */
+    color: #D8D8D8;
+}
+/* id="clock_frame" のdiv要素 */
+div#clock_frame
+{
+    /* 横幅を親要素であるbodyの100%(同じ幅)にする */
+    width: 100%;
+}
+
+/* span要素のデフォルト */
+span
+{
+    /* 本来はインライン要素であるspanをブロック要素として扱う */
+    display: block;
+    /* ここでは親要素であるdivの内部で右に寄せて配置させる */
+    float: right;
+    /* 横幅を親要素であるdivの85%にする */
+    width: 85%;
+    /* フォントの種類を一番上で指定したGoogle Webフォントに設定する */
+
+}
+
+/* id="clock_date" のspan要素 */
+span#clock_date
+{
+    /* この要素の中におけるテキストを右詰めにする デフォルト値のtext-align:leftを上書き */
+    text-align: right;
+    /* フォントの大きさを親要素であるdivで設定されたサイズ(px)の0.5倍にする */
+    font-size: 0.3em;
+    /* 右のパディングの幅を親要素であるdivで設定されたフォントサイズ(px)の0.5倍にする */
+    padding-right: 1em;
+      padding-top: 0.6em;
+
+}
+
+/* id="clock_time" のspan要素 */
+span#clock_time
+{
+    text-align: right;
+    /* フォントの大きさを親要素であるdivで設定されたサイズ(px)の2倍にする */
+    font-size: 0.8em;
+    padding-right: 0.3em;
+}
+div.wether
+{
+  text-align: left;
+  padding-left: 1.2em;
+  padding-top: 0.3em;
+}
+
+p.sample img {
+    width: 250px;  /* 横幅を200pxに */
+    margin: 0px;
+}
+p.rain {
+  padding-left: 1.6em;
+  font-size: 150%;
+  margin: 0px;
+
+}
+div.above{
+  margin-bottom: 230px;
+}
+
+div.bro
+{
+    text-align: right;
+    padding-right: 2.4em;
+    background: url("img/brown.gif");
+    -webkit-animation: bgiLoop 2s linear infinite;
+    animation: bgiLoop 2s linear infinite;
+    }
+    @-webkit-keyframes bgiLoop {
+    0% { background-position: 0 0;}
+    100% { background-position: -100px 200px;}
+    }
+    @keyframes bgiLoop {
+    0% { background-position: 0 0;}
+    100% { background-position: -100px 200px;}
+}

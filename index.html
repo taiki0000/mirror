@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 文字コードの宣言 -->
+    <meta charset="UTF-8">
+    <!-- ページのタイトル(ブラウザのタイトルバーに表示) -->
+    <title>jsClock-simple</title>
+    <!-- スタイルシート(CSS)読み込み -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- JavaScript読み込み -->
+    <script src="./clock.js"></script>
+    <script src="../lib/jquery-1.10.2.min.js"></script>
+<script>
+$(function() {
+    setInterval(function() {
+        $('.blink').css('visibility', $('.blink').css('visibility') == 'hidden' ? 'visible' : 'hidden');
+    }, 800);
+});
+</script>
+</head>
+
+<body>
+  <div class="above">
+  <TABLE BORDER="0" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR>
+<TD>
+
+  <div class="wether">
+    <p class="sample"><img src="sample.png"></p>
+    <p class="rain">降水確率 10%</p>
+  </div>
+
+</TD>
+<TD ALIGN="right">
+
+  <div id="clock_frame">
+      <!-- 日付部分 -->
+      <div id="date">
+      <span id="clock_date">2000/00/00</span></div>
+      <span id="body"></span>
+      <!-- 時刻部分 -->
+      <span id="clock_time">00:00</span>
+  </div>
+</TD>
+</TR>
+</TABLE>
+  </div>
+  <!-- 時計枠 -->
+  <div class="bro">
+    <p class="sample"><img src="brownn.gif"></p>
+  </div>
+
+</body>
+
+</html>

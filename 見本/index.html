@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="WeatherIcons/css/weather-icons.css">
+
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Title</title>
+
+    <style type="text/css">
+        <!--
+        body {
+            background-color: #000;
+        }
+
+        .row-margin {
+            height: 4.17vw;
+        }
+
+        .row-1 {
+            height: 8.33vw;
+        }
+
+        .row-2 {
+            height: 16.67vw;
+        }
+
+        .row-3 {
+            height: 25vw;
+        }
+
+        .row-4 {
+            height: 33.33vw;
+        }
+
+        .font-color-main {
+            color: white;
+        }
+
+        .font-color-sub {
+            color: #999;
+        }
+
+        .font-color-label {
+            color: #666;
+        }
+
+        .font-size-3 {
+            font-size: 20vw;
+        }
+
+        .font-size-2 {
+            font-size: 16.67vw;
+            line-height: 14vw;
+        }
+
+        .font-size-1 {
+            font-size: 8.33vw;
+            line-height: 8.33vw;
+        }
+
+        .font-size-middle {
+            font-size: 6vw;
+            line-height: 6vw;
+        }
+
+        .font-size-sub {
+            font-size: 4vw;
+            line-height: 4vw;
+        }
+
+        .font-size-min {
+            font-size: 2vw;
+            line-height: 2vw;
+        }
+
+        .text-position-left-bottom {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .text-position-left-top {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .text-position-right-bottom {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        .text-position-right-top {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .text-position-left-bottom-sub {
+            position: absolute;
+            left: 0;
+            bottom: 4vw;
+        }
+
+        .text-position-right-bottom-sub {
+            position: absolute;
+            right: 0;
+            bottom: 4vw;
+        }
+
+        .text-wrap {
+            width: 60vw;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .content-no-scroll {
+            overflow: hidden;
+        }
+
+        .page-whiteout {
+            animation: whiteout 1s ease 0s 1;
+        }
+
+        .page-fadeout {
+            animation: fadeout 1s ease 0s 1;
+        }
+
+        .page-fadein {
+            animation: fadein 1s ease 0s 1;
+        }
+
+        .page-full {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: fixed;
+            right: 0;
+            top: 0;
+        }
+
+        @keyframes whiteout {
+            0% {
+                background-color: #000;
+                opacity: 0;
+            }
+            100% {
+                background-color: #AAA;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes whiteout {
+            0% {
+                background-color: #000;
+                opacity: 0;
+            }
+            100% {
+                background-color: #AAA;
+                opacity: 1;
+            }
+        }
+
+        @-moz-keyframes whiteout {
+            0% {
+                background-color: #000;
+                opacity: 0;
+            }
+            100% {
+                background-color: #AAA;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @-moz-keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadein {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-moz-keyframes fadein {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        -->
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="row-margin"></div>
+</header>
+<div id="contents" class="content-no-scroll container-fluid">
+    <div id="page-1">
+        <div class="row row-2">
+            <div class="col-lg-offset-2 col-lg-2" style="height: 100%;">
+                <div class="font-color-sub font-size-sub text-position-left-bottom">
+                    <sapn id="clock_date">2000/01/01</sapn>
+                </div>
+            </div>
+            <div class="col-lg-6" style="height: 100%;">
+                <div class="font-color-main font-size-2 text-position-right-bottom">
+                    <span id="clock_hour">00</span><span id="clock_time_sep">:</span><span id="clock_min">00</span>
+                </div>
+            </div>
+        </div>
+        <div class="row row-margin">
+            <div class="col-lg-12"></div>
+        </div>
+        <div class="row row-3">
+            <div class="col-lg-offset-1 col-lg-4">
+                <div class="row row-3">
+                    <div class="font-size-3 text-position-right-top"><i id="weather_icon" class="wi wi-na"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="row">
+                    <div class="col-lg-12 row-1">
+                        <div class="label font-color-label font-size-middle text-position-left-top">City</div>
+                        <div class="font-size-sub text-position-right-bottom">
+                            <sapn id="weather_city"></sapn>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 row-1">
+                        <div class="label font-color-label font-size-middle text-position-left-top">Temperature</div>
+                        <div class="font-size-sub text-position-right-bottom"><span id="weather_temp">20.0</span>
+                            &#x2103;
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 row-1">
+                        <div class="label font-color-label font-size-middle text-position-left-top">Humidity</div>
+                        <div class="font-size-sub text-position-right-bottom"><span id="weather_humi">50.0</span> %
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="page-2">
+        <div class="row row-1">
+            <div class=" col-lg-offset-1 col-lg-10">
+                <div id="news_title" class="font-color-label font-size-middle"></div>
+            </div>
+        </div>
+        <div class="row row-margin">
+            <div class="col-lg-12"></div>
+        </div>
+        <div class="row row-4">
+            <div class="col-lg-offset-2">
+                <div class="row">
+                    <div class="col-lg-10 row-1">
+                        <div id="news_item_1"
+                             class="text-wrap font-color-main font-size-min text-position-left-top"></div>
+                        <div id="news_item_1_time"
+                             class="font-color-label font-size-min text-position-right-bottom-sub"></div>
+                        <div id="news_item_1_pub"
+                             class="font-color-sub font-size-min text-position-left-bottom-sub"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-10 row-1">
+                        <div id="news_item_2"
+                             class="text-wrap font-color-main font-size-min text-position-left-top"></div>
+                        <div id="news_item_2_time"
+                             class="font-color-label font-size-min text-position-right-bottom-sub"></div>
+                        <div id="news_item_2_pub"
+                             class="font-color-sub font-size-min text-position-left-bottom-sub"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-10 row-1">
+                        <div id="news_item_3"
+                             class="text-wrap font-color-main font-size-min text-position-left-top"></div>
+                        <div id="news_item_3_time"
+                             class="font-color-label font-size-min text-position-right-bottom-sub"></div>
+                        <div id="news_item_3_pub"
+                             class="font-color-sub font-size-min text-position-left-bottom-sub"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-10 row-1">
+                        <div id="news_item_4"
+                             class="text-wrap font-color-main font-size-min text-position-left-top"></div>
+                        <div id="news_item_4_time"
+                             class="font-color-label font-size-min text-position-right-bottom-sub"></div>
+                        <div id="news_item_4_pub"
+                             class="font-color-sub font-size-min text-position-left-bottom-sub"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="full" class="page-full"></div>
+
+<div style="position: fixed; top: 0;">
+    <button id="btn-debug-page-change" class="btn btn-info">page change</button>
+</div>
+
+<script>
+    // CONST
+    var RELOAD_INTERVAL_TIME = 300000;
+    var CLOCK_INTERVAL_TIME = 1000;
+    var PAGE_CHANGE_DURATION = 1000;
+    var TOUCH_EVENT_MUTEX_TIME = 3000;
+</script>
+
+<script>
+    // Clock
+    function decimalFormat(intVal, count) {
+        var intValLen = String(intVal).length;
+        if (count <= String(intVal).length) {
+            return intVal;
+        }
+
+        var strVal = "";
+        var paddingLen = count - intValLen;
+        for (var i = 0; i < paddingLen; i++) {
+            strVal += "0";
+        }
+
+        return strVal + intVal;
+    }
+
+    var beforeYear = 0;
+    var beforeMonth = 0;
+    var beforeDate = 0;
+    var beforeHours = -1;
+    var beforeMinutes = -1;
+
+    var clockDate = $("#clock_date");
+    var clockTimeSep = $('#clock_time_sep');
+    var clockHour = $('#clock_hour');
+    var clockMinute = $('#clock_min');
+
+    var clock = setInterval(function () {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var date = now.getDate();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+
+        if (beforeDate != date) {
+            clockDate.text(year + '/' + decimalFormat(month, 2) + '/' + decimalFormat(date, 2));
+            beforeYear = year;
+            beforeMonth = month;
+            beforeDate = date;
+        }
+
+        if (beforeHours != hours) {
+            clockHour.text(decimalFormat(hours, 2));
+            beforeHours = hours;
+        }
+
+        if (beforeMinutes != minutes) {
+            clockMinute.text(decimalFormat(minutes, 2));
+            beforeMinutes = minutes;
+        }
+        if (seconds % 2) {
+            clockTimeSep.removeClass("font-color-main");
+            clockTimeSep.addClass("font-color-sub");
+        } else {
+            clockTimeSep.removeClass("font-color-sub");
+            clockTimeSep.addClass("font-color-main");
+        }
+    }, CLOCK_INTERVAL_TIME);
+</script>
+
+<script>
+    // Weather
+    var weatherCity = $('#weather_city');
+    var weatherTemp = $('#weather_temp');
+    var weatherHumi = $('#weather_humi');
+    var weatherIcon = $('#weather_icon');
+
+    function setWeatherIcon(code) {
+        weatherIcon.removeClass();
+        weatherIcon.addClass("wi");
+
+        var group = code.toString().charAt(0);
+        console.log(group);
+
+        switch (parseInt(group)) {
+            // Group 2xx: Thunderstorm
+            case 2:
+                weatherIcon.addClass("wi-day-thunderstorm");
+                break;
+            // Group 3xx: Drizzle
+            case 3:
+                weatherIcon.addClass("wi-day-showers");
+                break;
+            // Group 5xx: Rain
+            case 5:
+                switch (code) {
+                    case 500:
+                    case 501:
+                    case 502:
+                    case 503:
+                    case 504:
+                        weatherIcon.addClass("wi-rain");
+                        break;
+                    case 511:
+                        weatherIcon.addClass("wi-snow");
+                        break;
+                    case 520:
+                    case 521:
+                    case 522:
+                    case 531:
+                        weatherIcon.addClass("wi-showers");
+                        break;
+                    default:
+                        weatherIcon.addClass("wi-rain");
+                        break;
+                }
+                break;
+            // Group 6xx: Snow
+            case 6:
+                weatherIcon.addClass("wi-snow");
+                break;
+            // Group 7xx: Atmosphere
+            case 7:
+                weatherIcon.addClass("wi-fog");
+                break;
+            // Group 800: Clear
+            // Group 80x: Clouds
+            case 8:
+                switch (code) {
+                    case 800:
+                        weatherIcon.addClass("wi-day-sunny");
+                        break;
+                    case 801:
+                        weatherIcon.addClass("wi-day-cloudy");
+                        break;
+                    case 802:
+                        weatherIcon.addClass("wi-cloud");
+                        break;
+                    case 803:
+                    case 804:
+                        weatherIcon.addClass("wi-cloudy");
+                        break;
+                    default:
+                        weatherIcon.addClass("wi-cloudy");
+                        break;
+                }
+                break;
+            // Group 90x: Extreme
+            // Group 9xx: Additional
+            case 9:
+                switch (code) {
+                    case 900:
+                    case 901:
+                        weatherIcon.addClass("wi-tornado");
+                        break;
+                    case 902:
+                        weatherIcon.addClass("wi-hurricane");
+                        break;
+                    case 903:
+                        weatherIcon.addClass("wi-snowflake-cold");
+                        break;
+                    case 904:
+                        weatherIcon.addClass("wi-hot");
+                        break;
+                    case 905:
+                        weatherIcon.addClass("wi-windy");
+                        break;
+                    case 906:
+                        weatherIcon.addClass("wi-hail");
+                        break;
+                    default:
+                        weatherIcon.addClass("wi-na");
+                        break;
+                }
+                break;
+
+            default:
+                weatherIcon.addClass("wi-na");
+                break;
+        }
+    }
+
+    function getWeather() {
+        $.get(
+                "get_weather.php",
+                null,
+                function (data) {
+                    var weather = JSON.parse(data);
+
+                    console.log(weather);
+                    weatherCity.text(weather.name);
+                    weatherTemp.text(weather.main.temp);
+                    weatherHumi.text(weather.main.humidity);
+
+                    setWeatherIcon(weather.weather[0].id);
+                }
+        );
+    }
+    getWeather();
+    var weather = setInterval(getWeather, RELOAD_INTERVAL_TIME);
+</script>
+
+<script>
+    // Google News via http://rss2json.com/
+    function getNews() {
+        $.get(
+                "get_news.php",
+                null,
+                function (data) {
+                    var news = JSON.parse(data);
+
+                    $('#news_title').text(news.feed.title);
+
+                    var ar = news.items[0].title.split(" - ");
+                    $('#news_item_1').text(ar[0]);
+                    $('#news_item_1_pub').text(ar[1]);
+                    $('#news_item_1_time').text(news.items[0].pubDate);
+
+                    var ar = news.items[1].title.split(" - ");
+                    $('#news_item_2').text(ar[0]);
+                    $('#news_item_2_pub').text(ar[1]);
+                    $('#news_item_2_time').text(news.items[0].pubDate);
+
+                    var ar = news.items[2].title.split(" - ");
+                    $('#news_item_3').text(ar[0]);
+                    $('#news_item_3_pub').text(ar[1]);
+                    $('#news_item_3_time').text(news.items[0].pubDate);
+
+                    var ar = news.items[3].title.split(" - ");
+                    $('#news_item_4').text(ar[0]);
+                    $('#news_item_4_pub').text(ar[1]);
+                    $('#news_item_4_time').text(news.items[0].pubDate);
+                }
+        );
+    }
+    getNews();
+    var news = setInterval(getNews, RELOAD_INTERVAL_TIME);
+</script>
+
+<script>
+    var page1 = $('#page-1');
+    var page2 = $('#page-2');
+    var full = $('#full');
+    var contents = $("#contents");
+
+    function getCurrentPage() {
+        if (page1.is(':visible')) {
+            return 1;
+        } else if (page2.is(':visible')) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
+    function showPage1() {
+        var d = new $.Deferred;
+        setTimeout(function () {
+            page1.show();
+            page2.hide();
+
+            d.resolve();
+        }, 0);
+
+        return d.promise();
+    }
+
+    function showPage2() {
+        var d = new $.Deferred;
+        setTimeout(function () {
+            page1.hide();
+            page2.show();
+
+            d.resolve();
+        }, 0);
+
+        return d.promise();
+    }
+
+    function hideAll() {
+        var d = new $.Deferred;
+        setTimeout(function () {
+            page1.hide();
+            page2.hide();
+
+            d.resolve();
+        }, 0);
+
+        return d.promise();
+    }
+
+    function fullFadeout() {
+        contents.addClass("page-fadeout");
+
+        var d = new $.Deferred;
+        setTimeout(function () {
+            d.resolve();
+        }, PAGE_CHANGE_DURATION);
+
+        return d.promise();
+    }
+
+    function fullFadein() {
+        contents.addClass("page-fadein");
+
+        var d = new $.Deferred;
+        setTimeout(function () {
+            contents.removeClass("page-fadeout");
+            contents.removeClass("page-fadein");
+            d.resolve();
+        }, PAGE_CHANGE_DURATION);
+
+        return d.promise();
+    }
+
+    $('#btn-debug-page-change').click(function () {
+        fullFadeout()
+                .then(function () {
+                            if (page1.is(':visible')) {
+                                return showPage2();
+                            } else {
+                                return showPage1();
+                            }
+                        }
+                )
+                .then(
+                        fullFadein
+                )
+        ;
+    });
+
+    hideAll();
+</script>
+
+<script>
+    // SSE
+    var evtSource = new EventSource("event.py");
+
+    // [Page2 reload] <- [Page2] <-> [Blank] <-> [Page1] -> [Page1 reload]
+
+    function touchLeftPad() {
+        fullFadeout()
+                .then(function () {
+                            switch (getCurrentPage()) {
+                                case 0:
+                                    return showPage2();
+                                    break;
+                                case 1:
+                                    return hideAll();
+                                    break;
+                                case 2:
+                                    return function () {
+                                        var d = new $.Deferred;
+                                        setTimeout(function () {
+                                            getNews();
+                                            clearInterval(news);
+                                            news = setInterval(getNews, RELOAD_INTERVAL_TIME);
+                                            d.resolve();
+                                        }, 0);
+
+                                        return d.promise();
+                                    };
+                                    break;
+                                default:
+                                    return hideAll();
+                            }
+                        }
+                )
+                .then(
+                        function () {
+                            return function () {
+                                var d = new $.Deferred;
+                                setTimeout(function () {
+                                    d.resolve();
+                                }, RELOAD_INTERVAL_TIME);
+
+                                return d.promise();
+                            }
+                        }
+                )
+                .then(
+                        fullFadein
+                )
+        ;
+
+    }
+
+    function touchRightPad() {
+        fullFadeout()
+                .then(function () {
+                            switch (getCurrentPage()) {
+                                case 0:
+                                    return showPage1();
+                                    break;
+                                case 1:
+                                    return function () {
+                                        var d = new $.Deferred;
+                                        setTimeout(function () {
+                                            getWeather();
+                                            clearInterval(weather);
+                                            weather = setInterval(getWeather, RELOAD_INTERVAL_TIME);
+                                            d.resolve();
+                                        }, 0);
+
+                                        return d.promise();
+                                    };
+                                    break;
+                                case 2:
+                                    return hideAll();
+                                    break;
+                                default:
+                                    return hideAll();
+                            }
+                        }
+                )
+                .then(
+                        function () {
+                            return function () {
+                                var d = new $.Deferred;
+                                setTimeout(function () {
+                                    d.resolve();
+                                }, RELOAD_INTERVAL_TIME);
+
+                                return d.promise();
+                            }
+                        }
+                )
+                .then(
+                        fullFadein
+                )
+        ;
+    }
+
+    // タッチイベント制御用
+    // タッチ検知からTOUCH_EVENT_MUTEX_TIMEミリ秒間は次のタッチを受け付けない。
+    var touchEventMutex = null;
+
+    function setTouchEventMutex() {
+        if (!touchEventMutex) {
+            touchEventMutex = setTimeout(function () {
+                touchEventMutex = null;
+            }, TOUCH_EVENT_MUTEX_TIME);
+        }
+    }
+
+    evtSource.addEventListener("touch_l1", function (e) {
+        console.log(e);
+        if (!touchEventMutex && e.data == 1) {
+            touchLeftPad();
+        }
+    }, false);
+    evtSource.addEventListener("touch_l2", function (e) {
+        console.log(e);
+        if (!touchEventMutex && e.data == 1) {
+            touchLeftPad();
+        }
+    }, false);
+    evtSource.addEventListener("touch_l3", function (e) {
+        console.log(e);
+        if (!touchEventMutex && e.data == 1) {
+            touchLeftPad();
+        }
+    }, false);
+    evtSource.addEventListener("touch_r1", function (e) {
+        console.log(e);
+        if (!touchEventMutex && e.data == 1) {
+            touchRightPad();
+        }
+    }, false);
+    evtSource.addEventListener("touch_r2", function (e) {
+        console.log(e);
+        if (!touchEventMutex && e.data == 1) {
+            touchRightPad();
+        }
+    }, false);
+    evtSource.addEventListener("touch_r3", function (e) {
+        console.log(e);
+        if (!touchEventMutex && e.data == 1) {
+            touchRightPad();
+        }
+    }, false);
+    evtSource.onerror = function (e) {
+        console.log(e);
+        alert("EventSource failed.");
+        evtSource.close();
+    };
+</script>
+
+</body>
+</html>
